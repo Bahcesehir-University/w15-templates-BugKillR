@@ -22,7 +22,7 @@
 template <typename T>
 T maxValue(T a, T b) {
     // TODO 1: return the larger of a and b
-    return a; // <-- replace
+    return a > b ? a : b; // <-- replace
 }
 
 // ---- Group 2: Function template with multiple type parameters --------------
@@ -33,75 +33,68 @@ T maxValue(T a, T b) {
 //         with decltype.
 template <typename T1, typename T2>
 auto addValues(T1 a, T2 b) -> decltype(a + b) {
-    // TODO 2: return the sum of a and b
-    return a; // <-- replace
+    return a + b;
 }
 
-// ---- Group 3: Class template ----------------------------------------------
-// TODO 3: Complete the class template Pair that stores two values of types
-//         A and B. Implement the getters, setters, and swapValues().
 template <typename A, typename B>
 class Pair {
 private:
     A first_;
     B second_;
 public:
-    // TODO 3a: constructor that initializes first_ and second_
-    Pair(A first, B second) {
-        // replace with member initialization
-    }
+    Pair(A first, B second) : first_(first), second_(second) { }
 
-    // TODO 3b: getters (const)
-    A getFirst() const  { return A(); }   // <-- replace
-    B getSecond() const { return B(); }   // <-- replace
+    A getFirst() const  { return first_; }
+    B getSecond() const { return second_; }
 
-    // TODO 3c: setters
-    void setFirst(A value)  { }           // <-- replace
-    void setSecond(B value) { }           // <-- replace
+    void setFirst(A value)  { first_ = value; }
+    void setSecond(B value) { second_ = value; }
 
-    // TODO 3d: swapValues - swap first_ and second_ (assume A == B when called)
     void swapValues() {
-        // replace
+        if (first_ == second_) {
+            A tmp = first_;
+            first_ = static_cast<A>(second_);
+            second_ = static_cast<B>(tmp);
+        }
     }
+    
 };
 
-// ---- Group 4: Generic container -------------------------------------------
-// TODO 4: Complete the class template Box, a generic dynamic container that
-//         stores elements of type T inside a std::vector<T>.
 template <typename T>
 class Box {
 private:
     std::vector<T> items_;
+    
 public:
-    // TODO 4a: add an item to the back
-    void add(const T& item) { }
+    void add(const T& item) { items_.push_back(item); }
 
-    // TODO 4b: return number of stored items as int
-    int size() const { return 0; }        // <-- replace
+    int size() const { items_.size(); }
 
-    // TODO 4c: return the item at index; throw std::out_of_range if invalid
     T get(int index) const {
-        return T(); // <-- replace
+        if (index > size())
+            throw   std::out_of_range("Out of range!");
+        return items_[index];
     }
 
-    // TODO 4d: return the sum of all stored elements
     T total() const {
-        return T(); // <-- replace
+        T sum = 0;
+        
+        for (unsigned short i = 0; i < size(); i++)
+            sum += items_[i];    
+        return sum;
     }
 };
 
-// ---- Group 5: Template specialization -------------------------------------
-// TODO 5a: Generic describe() - return 1 for any non-string type.
 template <typename T>
 int describe(const T& value) {
-    return 0; // <-- replace with 1
+    return 1;
 }
 
-// TODO 5b: Full specialization of describe for std::string.
-//          It must return 2 + the length of the string.
-//          Write the specialization below (template<> int describe<std::string>...).
-//
-//          <-- write your specialization here
+template <>
+int describe<std::string>(const std::string& value) {
+    return value.size() + 2;
+}
+
 
 // ---- Group 6: Non-type template parameter ---------------------------------
 // TODO 6: Complete FixedArray<T, N>, a stack array of compile-time size N.
@@ -109,23 +102,29 @@ template <typename T, int N>
 class FixedArray {
 private:
     T data_[N];
+
 public:
     // TODO 6a: default-construct all N elements to T()
     FixedArray() {
-        // replace
+        for (unsigned short i; i < N; i++)
+            data_[i] = T();
     }
 
     // TODO 6b: return N
-    int capacity() const { return 0; }    // <-- replace
+    int capacity() const { return N; }    // <-- replace
 
     // TODO 6c: set data_[index]; throw std::out_of_range if invalid
     void set(int index, const T& value) {
-        // replace
+        if (index > N)
+            throw   std::out_of_range("Out of range");
+        data_[index] = value;
     }
 
     // TODO 6d: return data_[index]; throw std::out_of_range if invalid
     T at(int index) const {
-        return T(); // <-- replace
+        if (index > N)
+            throw   std::out_of_range("Out of range");
+        return data_[index]; // <-- replace
     }
 };
 

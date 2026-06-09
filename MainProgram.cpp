@@ -51,11 +51,9 @@ public:
     void setSecond(B value) { second_ = value; }
 
     void swapValues() {
-        if (first_ == second_) {
             A tmp = first_;
             first_ = static_cast<A>(second_);
             second_ = static_cast<B>(tmp);
-        }
     }
     
 };
@@ -104,27 +102,23 @@ private:
     T data_[N];
 
 public:
-    // TODO 6a: default-construct all N elements to T()
     FixedArray() {
         for (unsigned short i; i < N; i++)
             data_[i] = T();
     }
 
-    // TODO 6b: return N
-    int capacity() const { return N; }    // <-- replace
+    int capacity() const { return N; }
 
-    // TODO 6c: set data_[index]; throw std::out_of_range if invalid
     void set(int index, const T& value) {
-        if (index > N)
-            throw   std::out_of_range("Out of range");
+        if (index < 0 || index > N)
+            throw   std::out_of_range("FixedArray index out of range");
         data_[index] = value;
     }
 
-    // TODO 6d: return data_[index]; throw std::out_of_range if invalid
     T at(int index) const {
-        if (index > N)
-            throw   std::out_of_range("Out of range");
-        return data_[index]; // <-- replace
+        if (index < 0 || index > N)
+            throw   std::out_of_range("FixedArray index out of range");
+        return data_[index];
     }
 };
 

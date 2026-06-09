@@ -1,15 +1,36 @@
-// KIJO WAS HERE
+// ============================================================================
+//  Lab: C++ Templates  (STUDENT VERSION)
+//  Course: Object-Oriented Programming with C++
+//  Single file only. No headers. C++17.
+//
+//  Complete every TODO. Do NOT rename the functions/classes/methods,
+//  and do NOT change their signatures - the autograder depends on them.
+// ============================================================================
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>
 
+// ================================
+// CLASS / TEMPLATE DEFINITIONS
+// ================================
+
+// ---- Group 1: Basic function template -------------------------------------
+// TODO 1: Write a function template maxValue that takes two values of the
+//         SAME type T and returns the larger one.
 template <typename T>
 T maxValue(T a, T b) {
-    return a > b ? a : b;
+    // TODO 1: return the larger of a and b
+    return a > b ? a : b; // <-- replace
 }
 
+// ---- Group 2: Function template with multiple type parameters --------------
+// TODO 2: Write a function template addValues that takes two values which may
+//         be of DIFFERENT types (T1, T2) and returns their sum.
+//         The return type must follow the usual arithmetic rules
+//         (e.g. int + double -> double). Use a trailing return type
+//         with decltype.
 template <typename T1, typename T2>
 auto addValues(T1 a, T2 b) -> decltype(a + b) {
     return a + b;
@@ -48,13 +69,13 @@ public:
     int size() const { items_.size(); }
 
     T get(int index) const {
-        if (index < 0 || index > size())
-            throw   std::out_of_range("Box index out of range!");
+        if (index < 0 || index >= size())
+            throw   std::out_of_range("Box index out of range");
         return items_[index];
     }
 
     T total() const {
-        T sum = T();
+        T sum = 0;
         
         for (unsigned short i = 0; i < size(); i++)
             sum += items_[i];    
@@ -98,10 +119,14 @@ public:
     }
 };
 
+// ================================
+// FUNCTION IMPLEMENTATIONS / main
+// ================================
+
 int main() {
-    
     std::cout << "=== C++ Templates Lab ===\n";
-    
+
+    // You may add your own test calls here to experiment.
     std::cout << "maxValue(3, 7) = " << maxValue(3, 7) << "\n";
 
     return 0;

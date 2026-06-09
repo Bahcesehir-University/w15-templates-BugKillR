@@ -54,7 +54,7 @@ public:
     }
 
     T total() const {
-        T sum = 0;
+        T sum = T();
         
         for (unsigned short i = 0; i < size(); i++)
             sum += items_[i];    

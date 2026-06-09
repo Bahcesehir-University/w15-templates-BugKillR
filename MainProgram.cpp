@@ -1,36 +1,15 @@
-// ============================================================================
-//  Lab: C++ Templates  (STUDENT VERSION)
-//  Course: Object-Oriented Programming with C++
-//  Single file only. No headers. C++17.
-//
-//  Complete every TODO. Do NOT rename the functions/classes/methods,
-//  and do NOT change their signatures - the autograder depends on them.
-// ============================================================================
+// KIJO WAS HERE
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>
 
-// ================================
-// CLASS / TEMPLATE DEFINITIONS
-// ================================
-
-// ---- Group 1: Basic function template -------------------------------------
-// TODO 1: Write a function template maxValue that takes two values of the
-//         SAME type T and returns the larger one.
 template <typename T>
 T maxValue(T a, T b) {
-    // TODO 1: return the larger of a and b
-    return a > b ? a : b; // <-- replace
+    return a > b ? a : b;
 }
 
-// ---- Group 2: Function template with multiple type parameters --------------
-// TODO 2: Write a function template addValues that takes two values which may
-//         be of DIFFERENT types (T1, T2) and returns their sum.
-//         The return type must follow the usual arithmetic rules
-//         (e.g. int + double -> double). Use a trailing return type
-//         with decltype.
 template <typename T1, typename T2>
 auto addValues(T1 a, T2 b) -> decltype(a + b) {
     return a + b;
@@ -69,8 +48,8 @@ public:
     int size() const { items_.size(); }
 
     T get(int index) const {
-        if (index > size())
-            throw   std::out_of_range("Out of range!");
+        if (index < 0 || index > size())
+            throw   std::out_of_range("Box index out of range!");
         return items_[index];
     }
 
@@ -93,9 +72,6 @@ int describe<std::string>(const std::string& value) {
     return value.size() + 2;
 }
 
-
-// ---- Group 6: Non-type template parameter ---------------------------------
-// TODO 6: Complete FixedArray<T, N>, a stack array of compile-time size N.
 template <typename T, int N>
 class FixedArray {
 private:
@@ -122,14 +98,10 @@ public:
     }
 };
 
-// ================================
-// FUNCTION IMPLEMENTATIONS / main
-// ================================
-
 int main() {
+    
     std::cout << "=== C++ Templates Lab ===\n";
-
-    // You may add your own test calls here to experiment.
+    
     std::cout << "maxValue(3, 7) = " << maxValue(3, 7) << "\n";
 
     return 0;

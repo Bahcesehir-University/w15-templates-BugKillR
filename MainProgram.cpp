@@ -66,7 +66,7 @@ private:
 public:
     void add(const T& item) { items_.push_back(item); }
 
-    int size() const {static_cast<int>( items_.size()); }
+    int size() const { return static_cast<int>( items_.size()); }
 
     T get(int index) const {
         if (index < 0 || index >= size())
